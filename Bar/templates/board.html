@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .container {
+    display: inline-block;
+    width: 45%; /* Adjust width as needed */
+    margin: 20px;
+    vertical-align: top; /* Align containers at the top */
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+</style>
+
+<div class="conatiner">
+    <div class="row">
+    <div class="col">
+        <h1>Ping High Score Board</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="highscore-table">
+                {% for score in ping_scores %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{score.user.username}}</td>
+                    <td>{{score.score}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <h1>Guitar Villain High Score Board</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="highscore-table">
+                {% for score in guitarScore %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{score.user.username}}</td>
+                    <td>{{score.score}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <h1>Head Popper High Score Board</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="highscore-table">
+                {% for score in headPopperScore %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{score.user.username}}</td>
+                    <td>{{score.score}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

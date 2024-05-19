@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game of ping</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+    * {
+       font-family: 'Silkscreen', sans-serif; 
+    }
+    body {
+        text-align: center;
+        background-color: ghostwhite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        position: fixed;
+        width: 100%;
+    }
+    .pingSlider {
+      margin-left: 100px;
+      width: 200px;
+      background-color: #FFFFFF00;
+      -webkit-appearance: none;
+      position: relative;
+      z-index: 1;
+    }
+    .pingLine {
+      width: 100px;
+      height: 7px;
+      background-image: linear-gradient(to left, #0075FF 0%, #0075FF 50%, lightgray 50%, lightgray 100%);
+      position: absolute;
+      margin-top: -16px;
+      margin-left: 100px;
+      border-radius: 20px;
+    }
+</style>
+<body>
+    <h1>Game of ping</h1>
+    <canvas></canvas>
+    <p>control the left player using up and down arrow keys</p>
+    <script src="{% static 'ping.js' %}"></script>
+    <div class="slidecontainer">
+      <p>choose youre ping</p>
+        <input type="range" min="0" max="200" value="50" class="pingSlider" id="pingSlider">
+        <hr class="pingLine" id="pingLine">
+      <p>ping: <span id="demo"></span></p>
+    </div>
+    <script>
+      var slider = document.getElementById("pingSlider");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+      
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+        gradiant = (this.value > 100) ? 100 : this.value;
+        document.getElementById("pingLine").style.backgroundImage = "linear-gradient(to left, #0075FF 0%, #0075FF " + gradiant + "%, lightgray " + gradiant + "%, lightgray 100%)";
+      }
+      </script>
+</body>
+</html>

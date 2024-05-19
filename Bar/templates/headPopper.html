@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        background-image: url("/media/headPopper/bg1.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        cursor: none;
+    }
+    body * {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+    }
+    .gameCanvas {
+        border:1px solid #d3d3d3;
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+    }
+
+    .gameEvents {
+        overflow: hidden;
+        position: absolute;
+        display: flex;
+        width: 1920px;
+        height: 1080px;
+        align-items: center;
+        justify-content: center;
+    }
+    .gameItems {
+        position: absolute;
+        align-self: flex-end;
+        background-image: url('Gray_background.jpg');
+        border-top: 3px solid lightgray;
+        outline: 3px solid black;
+        height: 80px;
+        display: none;
+        width: 100%;
+        justify-content: space-between;
+        font-size: 28px;
+        color: #7e0000;
+        transition: all 1s ease;
+    }
+    .gameEvents[value='true'] .gameItems {
+        display: flex;
+    }
+    .gameItems div {
+        font-weight: 600;
+    }
+
+    .startButton {
+        height: 80px;
+    }
+    .startButton:hover {
+        filter: brightness(90%);
+    }
+
+    .enemy {
+        position: absolute;
+        align-self: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .gameScore {
+        background-color: #FFFFFF55;
+        padding: 10px 30px;
+        font-size: 3rem;
+        color: #ff0000;
+        font-weight: 700;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        z-index: 1000;
+    }
+    
+    .gunAmmo {
+        background-color: #FFFFFF55;
+        padding: 10px 30px;
+        font-size: 3rem;
+        color: #ff0000;
+        font-weight: 700;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        z-index: 1000;
+    }
+
+    .gameGuns {
+        position: absolute;
+        z-index: 1000;
+
+        bottom: 200px;
+        left: 20vw;
+        padding: 0px 10px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        background-color: #FFFFFF;
+        
+        height: 70px;
+        width: 300px;
+
+        border: solid black 5px;
+    }
+    .gameGuns > span {
+        font-size: 2rem;
+    }
+    .gameGuns > .gunIcon {
+        height: 60px;
+        width: 100px;
+
+        background-size: contain;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+    .gameGuns::after {
+        content: "▼";
+        font-size: 2rem;
+    }
+
+    #gameCursor {
+        width: 40px;
+        height: 40px;
+        background-image: url("/media/headPopper/crossight hand.png");
+        background-size: cover;
+        background-position: center;
+        margin-left: -20px;
+        margin-top: -20px;
+
+        position: absolute;
+        z-index: 100000000;
+        pointer-events: none;
+    }
+    .gameInfoText {
+        width: 100vw;
+        height: 100vh;
+
+        background-color: #00000088;
+        position: absolute;
+
+        z-index: 2000;
+
+        top: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .gameInfoText * {
+        font-size: 3rem;
+        color: white;
+    }
+</style>
+
+<div class="gameEvents" id="gameEvents" value=false>
+    <div id="gameCursor" ondragstart="return false"></div>
+    <div class="gameScore">Score: <span id="gameScore">0</span></div>
+    <div class="gunAmmo">Ammo: <span id="gunAmmo">0</span></div>
+    <div id="gameGuns" class="gameGuns">
+        <span id="gunImage" class="gunIcon" style=""></span>
+        <span id="gunName"></span>
+    </div>
+    <!-- <div class="gameItems">
+        <div>Score: 0</div>
+        <div>Health: 100%</div>
+        <div>*_*</div>
+        <div>Ammo: 100</div>
+        <div>Weapons</div>
+    </div> -->
+</div>
+
+<script>
+    const gameCursor = document.getElementById("gameCursor");
+    const positionElement = (e) => {
+        const mouseY = e.clientY;
+        const mouseX = e.clientX;
+        
+        gameCursor.style.left = mouseX + "px";
+        gameCursor.style.top = mouseY + "px";
+    }
+    window.addEventListener('mousemove', positionElement)
+</script>
+
+<script src="{% static 'headPopper.js' %}"></script>
+
+{% endblock %}

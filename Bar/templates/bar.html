@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url('media/backround.png');
+        overflow: hidden;
+    }
+    @keyframes popup {
+        0% {
+            height: 10px;
+            width: 3px;
+            left: 50px;
+        }
+        25% {
+            height: 10px;
+            width: 3px;
+        }
+        80% {
+            height: 10px;
+        }
+        100% {}
+    }
+    @keyframes fade {
+        0% {
+          opasity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+    }
+    
+    .character {
+        position: absolute;
+    }
+    .character .animation{
+
+        display: none;
+        position: absolute;
+    }
+    .img-top {
+        z-index: 99;
+    }
+    .character:hover .animation{
+        background-color: #00000083;
+        height: 100%;
+        color: aliceblue;
+        animation-duration: 0.75s;
+        animation-name: popup;
+        display: inline;
+        overflow: hidden;
+    }
+</style>
+
+<img src="media/rat man.png" width="1920" height="1080" style="position: absolute; margin-top: 0px;">
+<img src="media/chair front.png" width="1920" height="1080" style="position: absolute; margin-top: 0px; margin-left: 0px">
+
+{% for character in characters %}
+<div class="character" style="top: {{character.top}}px; left: {{character.left}}px; position: absolute; height: {{character.height}}px;">
+    <img class="npc" src="{{character.defaultImage}}" highlight="{{character.glowImage}}" style="position: absolute;">
+    <span style="left: 70px; width: 300px" class="animation">
+        <div class="m-4 h5">
+            {{character.name}}
+        </div>
+        <div style="padding: 0px 30px 0px 50px"><pre>{{ character.text }}</pre></div>
+    </span>
+</div>
+{% endfor %}
+
+<a href="{% url 'bar:ping' %}">
+<div class="character" style="position: absolute; top: 363px; left: 1590px; height: 279px">
+    <img class="npc" src="media/ping.png" highlight="media/ping1.png" style="position: absolute; margin-top: 9px; margin-left: 0px">
+    <!-- <span style="left: 70px; width: 300px; top: 10px" class="animation">
+        <div class="m-4 h5">
+            Visper Talksalot
+        </div>
+    </span> -->
+</div>
+</a>
+
+<a href="{% url 'bar:guitarGame' %}">
+    <div class="character" style="position: absolute; top: 240px; left: 475px; height: 279px">
+        <img class="npc" src="media/guitar.png" highlight="media/guitarGlow.png" style="position: absolute; margin-top: 9px; margin-left: 0px">
+        <!-- <span style="left: 70px; width: 300px; top: 10px" class="animation">
+            <div class="m-4 h5">
+                Visper Talksalot
+            </div>
+        </span> -->
+    </div>
+    </a>
+
+    <a href="{% url 'bar:headPopper' %}">
+        <div class="character" style="position: absolute; top: 250px; left: 250px; height: 279px">
+            <img class="npc" src="media/cabin.png" highlight="media/cabinGlow.png" style="position: absolute; margin-top: 9px; margin-left: 0px">
+            <!-- <span style="left: 70px; width: 300px; top: 10px" class="animation">
+                <div class="m-4 h5">
+                    Visper Talksalot
+                </div>
+            </span> -->
+        </div>
+        </a>
+
+<a href="{% url 'bar:board' %}">
+    <div class="character" style="position: absolute; top: 363px; left: 1590px; height: 279px">
+        <img class="npc" src="media/board.png" highlight="media/boardGlow.png" style="position: absolute; margin-top: -150px; margin-left: -275px">
+        <!-- <span style="left: 70px; width: 300px; top: 10px" class="animation">
+            <div class="m-4 h5">
+                Visper Talksalot
+            </div>
+        </span> -->
+    </div>
+    </a>
+{% if intro == 1 %}
+<div style="position: absolute;" id = "123"> 
+    <video id="video1" style="position: absolute;" paused="true" onended="videoDelete()">
+        <source src="media/movie.mp4" type="video/mp4">
+    </video>
+    <button type="button" class="btn btn-danger" onclick="playPause()" style="position: absolute; margin-top: 400px; margin-left: 905px" id="app">enter</button>
+</div>
+{% endif %}
+
+<script>
+    $('.character').mouseenter(function() {
+        self = $(this)[0].getElementsByClassName('npc')[0];
+        highlight = self.getAttribute('highlight');
+        self.setAttribute('highlight', self.getAttribute('src'));
+        self.src = highlight;
+        
+        self.classList.add('img-top');
+    }).mouseleave(function() {
+        self = $(this)[0].getElementsByClassName('npc')[0];
+        highlight = self.getAttribute('highlight');
+        self.setAttribute('highlight', self.getAttribute('src'));
+        self.src = highlight;
+
+        self.classList.remove('img-top');
+    });
+    function playPause() { 
+        document.getElementById("video1").play(); 
+        document.getElementById("app").remove();
+    } 
+    function videoDelete(){
+        document.getElementById('video1').style.animation = "fade 1s";
+        setTimeout(function(){document.getElementById("123").remove()}, 990);
+    }
+</script>
+{% endblock %}

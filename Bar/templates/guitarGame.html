@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body{
+        background-image: url('/media/koncert.png');
+        overflow: hidden;
+    }
+    @keyframes moveTheNotes {
+        from {left: 100%}
+        to {left: 0%}
+    }
+
+    #guitarParent {
+        transition: all 1s ease;
+    }
+    #guitarParent[value='true'] {
+        margin: 22.5vh 0px;
+    }
+    #guitar {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        transition: all 1s ease;
+        justify-content: center;
+    }
+    #guitar[value='true'] {
+        background-color: #937A7F;
+        width: 100vw;
+    }
+    #guitar > .string {
+        position: relative;
+        height: 2px;
+        width: 100%;
+        margin: 5px 0px;
+        background-color: #555555;
+        display: flex;
+        transition: all 1s ease;
+    }
+    #guitar[value='true'] > .string {
+        height:7.5px;
+        margin: 15px 0px;
+        transition: all 1s ease;
+    }
+    .string > .note {
+        display: flex;
+        margin-top: -18px;
+        background-color: aqua;
+        height: 45px;
+        width: 45px;
+        border: solid 1px black;
+        position: absolute;
+        border-radius: 100px;
+
+        align-items: center;
+        justify-content: center;
+    }
+    .string:nth-of-type(1) > .note {background-color: red;}
+    .string:nth-of-type(1) > .note:after {content: "W";}
+
+    .string:nth-of-type(2) > .note {background-color: green;}
+    .string:nth-of-type(2) > .note:after {content: "A";}
+    
+    .string:nth-of-type(3) > .note {background-color: yellow;}
+    .string:nth-of-type(3) > .note:after {content: "S";}
+
+    .string:nth-of-type(4) > .note {background-color: blue;}
+    .string:nth-of-type(4) > .note:after {content: "D";}
+
+    .string:nth-of-type(5) > .note {background-color: goldenrod;}
+    .string:nth-of-type(5) > .note:after {content: "X";}
+
+    .guitar {
+        position: absolute;
+        height: 400%;
+        align-self: flex-start;
+        margin-left: -45%;
+        z-index: -1;
+    }
+</style>
+
+<style>
+    #guitarScore {
+        position: fixed;
+        right: -200px;
+        top: 80px;
+        background-color: #000000;
+        color: #FFFFFF;
+        text-align: center;
+        padding: 0.2rem 2rem;
+        font-size: 2rem;
+        border: 4px solid #888888;
+        outline: 4px solid #FFFFFF;
+        transition: all 1s ease;
+    }
+    #guitarParent[value='true'] #guitarScore {
+        right: 50px;
+    }
+
+    .note-point {
+        display: none;
+        position: absolute;
+        height: 120%;
+        margin-left: 15%;
+        width: 10px;
+        background-color: #44CC44;
+    }
+    #guitar[value='true'] .note-point {
+        display: block;
+    }
+</style>
+
+<script>
+    var sounds = [
+        '/media/guitarGame/GuitarSounds/DrumKick_V1.mp3',
+        '/media/guitarGame/GuitarSounds/DrumKick_V1.mp3',
+        '/media/guitarGame/GuitarSounds/DrumKick_V1.mp3',
+        '/media/guitarGame/GuitarSounds/DrumKick_V1.mp3',
+        '/media/guitarGame/GuitarSounds/Final.mp3'
+    ]
+    gameInterval = false;
+    scores = 0;
+    tickSpeed = 1000;
+    notes = [];
+
+    function addNote(sound = null) {
+        strings = document.getElementsByClassName("string");
+        if (sound == null) {
+            sound = Math.floor(Math.random() * 4);
+        }
+
+        note = document.createElement("span");
+        note.classList = "note";
+        note.value = sounds[sound];
+        
+        strings[sound].appendChild(note);
+
+        notes.push(note);
+        note.style.animation = 'moveTheNotes 4s linear';
+
+        note.addEventListener("animationend", function() {
+            endGame();
+        });
+    }
+    function gameCycle() {
+        if (gameInterval) {
+            if (tickSpeed < 50) {
+                addNote(4);
+            } else {
+                addNote();
+                setTimeout(gameCycle, tickSpeed);
+                tickSpeed -= 15;
+            }
+        }
+    }
+    function startGame() {
+        guitar = document.getElementById('guitar');
+        if (guitar.getAttribute('value') != 'true') {
+            document.getElementById('guitarParent').setAttribute('value', 'true')
+            guitar.style.animation = 'getGuitar 2s linear';
+            guitar.setAttribute('value', 'true');
+            document.getElementById("guitarScore").innerHTML = 0;
+
+            setTimeout(function() {
+                tickSpeed = 800;
+                gameInterval = true;
+                scores = 0;
+                setTimeout(gameCycle, tickSpeed);
+            }, 3000);
+        }
+    }
+    document.body.addEventListener('keypress', function() {
+        let key = event.keyCode;
+        if (guitar.getAttribute('value') == 'true') {
+            string = document.getElementsByClassName("string");
+            switch (key) {
+                case 119:
+                    string = string[0];
+                    break;
+                case 97:
+                    string = string[1];
+                    break;
+                case 115:
+                    string = string[2];
+                    break;
+                case 100:
+                    string = string[3];
+                    break;
+                case 120:
+                    string = string[4];
+                    break;
+            }
+            try {
+                note = string.getElementsByClassName("note")[0];
+
+                if (notes.indexOf(note) == 0) {
+                    var rect1 = document.getElementById("noteLanding").getBoundingClientRect();
+                    var rect2 = note.getBoundingClientRect();
+
+                    overlap = !(
+                        rect1.top > rect2.bottom ||
+                        rect1.right < rect2.left ||
+                        rect1.bottom < rect2.top ||
+                        rect1.left > rect2.right
+                    );
+                    if (overlap) {
+                        scores += 100;
+                    } else {
+                        scores += 50;
+                    }
+
+                    document.getElementById("guitarScore").innerHTML = scores;
+
+                    new Audio(note.value).play();
+                    note.remove();
+                    notes.shift();
+                    if (event.keyCode == 120) {
+                        endGame(true);
+                    }
+                } else {
+                    endGame();
+                }
+            } catch {
+                endGame();
+            }
+        }
+    })
+    async function endGame(win = false) {
+        gameInterval = false;
+        if ( confirm("Add your score to score board?") ) {
+            window.location.href = "/guitarScore/" + scores;
+        }
+        while (notes.length > 0) {
+            notes[0].remove();
+            notes.shift();
+        }
+        setTimeout(function() {
+            document.getElementById('guitar').setAttribute('value', 'false');
+            document.getElementById('guitarParent').setAttribute('value', 'false');
+        }, 100)
+    }
+</script>
+
+<div id="guitarParent" style="height: 100vh; margin-top: 30vh;">
+    <div id="guitarScore">0</div>
+    <div id="guitar" onclick="startGame()">
+        <img class="guitar" src="/media/guitarGame/guitar.png">
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="string"></div>
+        <div class="note-point" id="noteLanding"></div>
+    </div>
+</div>
+{% endblock %}

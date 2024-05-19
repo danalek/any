@@ -1,0 +1,31 @@
+{% extends 'bar.html' %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+    * {
+       font-family: 'Protest Guerrilla', sans-serif; 
+    }
+    body {
+        background-image: url('/media/door.png');
+        overflow: hidden;
+    }
+</style>
+<div class="row" style="margin-top:10%">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="margin-top:5%">
+        <form action="{% url 'bar:checkLogin' %}" method="post">
+            {% csrf_token %}
+            <div class="form-outline mb-4">
+                <label class="form-label" style="color: blue;">Username</label>
+                <input name="username" class="form-control" />
+            </div>
+            <!-- <a href="{% url 'bar:ping' %}"> -->
+            <div class="row mb-4">
+                <input type="submit" class="btn btn-primary btn-block mb-4" value="Enter"/>
+            </div>
+        </form>
+        <!-- </a> -->
+    </div>
+</div>
+{% endblock %}
