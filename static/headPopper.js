@@ -646,7 +646,7 @@ var Game = {
     endGameMenu: function (text) {
         Game.over = true;
         if ( confirm("Save score?") ) {
-            window.location.href = "/headpopper/" + this.score;
+            window.location.href = "/headPopper/" + this.score;
         } else {
             setTimeout(function(){
                 Game = Object.assign({}, Game);
