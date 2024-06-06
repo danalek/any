@@ -92,25 +92,25 @@ class Floater extends Enemy {
                     "depth": 8,
                     "altitude": height - 500,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }, {
                     "time": 500,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }, {
                     "time": 800,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }, {
                     "time": 6800,
                     "depth": 1,
                     "altitude": height/20,
                     "angle": distance/20,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }]
                 break;
             // It almost stands there, menacingly
@@ -122,25 +122,25 @@ class Floater extends Enemy {
                     "depth": 8,
                     "altitude": height - 500,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }, {
                     "time": 500,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }, {
                     "time": 800,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }, {
                     "time": 10000000,
                     "depth": 1,
                     "altitude": height/20,
                     "angle": distance/20,
-                    "sprite": "/media/headpopper/head1.png",
+                    "sprite": "/media/headpopper/baloonRed.png",
                 }]
                 break;
         }
@@ -167,7 +167,7 @@ class Spider extends Enemy {
                     "depth": 8,
                     "altitude": 100,
                     "angle": Math.floor(Math.random() * 1600) -800,
-                    "sprite": "/media/headpopper/thisthing.gif",
+                    "sprite": "/media/headpopper/crab.png",
                 }];
                 var newAngle = path[path.length-1]["angle"] + (Math.floor(Math.random() * 600) -300);
                 newAngle = (newAngle < -800) ? -800 : newAngle;
@@ -177,7 +177,7 @@ class Spider extends Enemy {
                     "depth": 5,
                     "altitude": 170,
                     "angle": newAngle,
-                    "sprite": "/media/headpopper/thisthing.gif",
+                    "sprite": "/media/headpopper/crab.png",
                 });
                 newAngle = path[path.length-1]["angle"] + (Math.floor(Math.random() * 300) -150);
                 newAngle = (newAngle < -400) ? -400 : newAngle;
@@ -187,28 +187,28 @@ class Spider extends Enemy {
                     "depth": 3,
                     "altitude": 210,
                     "angle": newAngle,
-                    "sprite": "/media/headpopper/thisthing.gif",
+                    "sprite": "/media/headpopper/crab.png",
                 });
                 path.push({
                     "time": 6000,
                     "depth": 1,
                     "altitude": 250,
                     "angle": 0,
-                    "sprite": "/media/headpopper/thisthing.gif",
+                    "sprite": "/media/headpopper/crab.png",
                 });
                 path.push({
                     "time": 6100,
                     "depth": 0.8,
                     "altitude": 0,
                     "angle": 0,
-                    "sprite": "/media/headpopper/thisthing.gif",
+                    "sprite": "/media/headpopper/crab.png",
                 });
                 path.push({
                         "time": 7100,
                         "depth": 0.8,
                         "altitude": 0,
                         "angle": 0,
-                        "sprite": "/media/headpopper/thisthing.gif",
+                        "sprite": "/media/headpopper/crab.png",
                 });
                 break;
         }
@@ -236,26 +236,26 @@ class Balooner extends Enemy {
                     "depth": 8,
                     "altitude": height - 400,
                     "angle": distance,
-                    "sprite": "/media/headpopper/Balooner.png",
+                    "sprite": "/media/headpopper/baloon.png",
                 }, {
                     "time": 500,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/Balooner.png",
+                    "sprite": "/media/headpopper/baloon.png",
                 }, {
                     "time": 800,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/Balooner.png",
+                    "sprite": "/media/headpopper/baloon.png",
                 }]
                 var end = {
                     "time": 6800,
                     "depth": 1,
                     "altitude": height/20,
                     "angle": distance/20,
-                    "sprite": "/media/headpopper/Balooner.png",
+                    "sprite": "/media/headpopper/baloon.png",
                 }
                 for (var x = 100; x < 6800; x += Math.floor(Math.random() * 100 ) + 150) {
                     let progress = x / end["time"];
@@ -268,7 +268,7 @@ class Balooner extends Enemy {
                         "depth": depth,
                         "altitude": altitude,
                         "angle": angle,
-                        "sprite": "/media/headpopper/Balooner.png",
+                        "sprite": "/media/headpopper/baloon.png",
                     }
                     path.push(temp);
                 }
@@ -283,14 +283,14 @@ class Balooner extends Enemy {
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/Balooner.png",
+                    "sprite": "/media/headpopper/baloon.png",
                 }]
                 var end = {
                     "time": 6000,
                     "depth": 1,
                     "altitude": height/20,
                     "angle": distance/20,
-                    "sprite": "/media/headpopper/Balooner.png",
+                    "sprite": "/media/headpopper/baloon.png",
                 }
                 for (var x = 100; x < 6000; x += Math.floor(Math.random() * 100 ) + 100) {
                     let progress = x / end["time"];
@@ -303,7 +303,7 @@ class Balooner extends Enemy {
                         "depth": depth,
                         "altitude": altitude,
                         "angle": angle,
-                        "sprite": "/media/headpopper/Balooner.png",
+                        "sprite": "/media/headpopper/baloon.png",
                     }
                     path.push(temp);
                 }
@@ -335,26 +335,26 @@ class Boss extends Enemy {
                     "depth": 8,
                     "altitude": height - 500,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head boss.png",
+                    "sprite": "/media/headpopper/target.png",
                 }, {
                     "time": 500,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head boss.png",
+                    "sprite": "/media/headpopper/target.png",
                 }, {
                     "time": 800,
                     "depth": 8,
                     "altitude": height,
                     "angle": distance,
-                    "sprite": "/media/headpopper/head boss.png",
+                    "sprite": "/media/headpopper/target.png",
                 }]
                 var end = {
                     "time": 15000,
                     "depth": 1,
                     "altitude": 0,
                     "angle": distance/20,
-                    "sprite": "/media/headpopper/head boss.png",
+                    "sprite": "/media/headpopper/target.png",
                 }
 
                 for (var x = 1500; x < 15000; x += Math.floor(Math.random() * 500 ) + 3000) {
@@ -371,7 +371,7 @@ class Boss extends Enemy {
                         "depth": depth,
                         "altitude": altitude,
                         "angle": angle,
-                        "sprite": "/media/headpopper/head boss.png",
+                        "sprite": "/media/headpopper/target.png",
                     });
 
                     let pattern = 1;
@@ -382,28 +382,28 @@ class Boss extends Enemy {
                                 "depth": depth,
                                 "altitude": altitude,
                                 "angle": minAngle,
-                                "sprite": "/media/headpopper/head boss.png",
+                                "sprite": "/media/headpopper/target.png",
                             });
                             path.push({
                                 "time": x + 600,
                                 "depth": depth,
                                 "altitude": altitude,
                                 "angle": maxAngle,
-                                "sprite": "/media/headpopper/head boss.png",
+                                "sprite": "/media/headpopper/target.png",
                             });
                             path.push({
                                 "time": x + 900,
                                 "depth": depth,
                                 "altitude": altitude,
                                 "angle": minAngle,
-                                "sprite": "/media/headpopper/head boss.png",
+                                "sprite": "/media/headpopper/target.png",
                             });
                             path.push({
                                 "time": x + 1200,
                                 "depth": depth,
                                 "altitude": altitude,
                                 "angle": maxAngle,
-                                "sprite": "/media/headpopper/head boss.png",
+                                "sprite": "/media/headpopper/target.png",
                             });
                             break;
                     }
@@ -412,7 +412,7 @@ class Boss extends Enemy {
                         "depth": depth,
                         "altitude": altitude,
                         "angle": angle,
-                        "sprite": "/media/headpopper/head boss.png",
+                        "sprite": "/media/headpopper/target.png",
                     });
                 }
 
@@ -507,8 +507,8 @@ var Game = {
             ammo: 9999,
             rechargeTime: 0,
             modifiers: {Floater: 1, Spider: 1, Balooner: 1},
-            icon: "/media/headpopper/hand gun.png",
-            id: "Pistol",
+            icon: "/media/headpopper/watergun.png",
+            id: "Watergun",
         });
 
         Game.weapons[0].selectGun();
@@ -552,8 +552,8 @@ var Game = {
                     ammo: 3,
                     rechargeTime: 5000,
                     modifiers: {Floater: 1, Spider: 1, Balooner: 1},
-                    icon: "/media/headpopper/WINchester.png",
-                    id: "Rifle",
+                    icon: "/media/headpopper/waterRifle.png",
+                    id: "Waterifle",
                 }
             }, {
                 "background": "/media/headpopper/bg2.png",
